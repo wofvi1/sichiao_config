@@ -1,0 +1,37 @@
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: wofbi1.cn:8848
+    sentinel:
+      transport: #dashboard地址
+        dashboard: wofbi1.cn:8080
+        port: 8089  #默认端口，如果被占用则从8719依次+1扫描
+  datasource:
+    url: jdbc:mysql://wofbi1.cn:3306/sichiao?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: SiChiao#|(&@.4MYSQL
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      max-lifetime: 60000
+      maximum-pool-size: 10
+  redis:
+    host: wofbi1.cn
+    port: 6379
+    password: SiChiao#|(&@.4REDIS
+sichiao:
+  services:
+    sichiao-system-8000,
+    sichiao-graphql-8100,
+    sichiao-git-8200,
+    sichiao-account-8300,
+    sichiao-email-8400,
+    sichiao-project-8500
+feign:
+  sentinel:
+    enabled: true
+ribbon:
+  eager-load:
+    enabled: true
